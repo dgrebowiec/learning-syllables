@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { badges as badgesData } from '../data/content';
 
 const GameContext = createContext();
 
@@ -15,6 +16,11 @@ export const GameProvider = ({ children }) => {
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [myBadges, setMyBadges] = useState(() => {
+      const saved = localStorage.getItem('myBadges');
+      return saved ? JSON.parse(saved) : [];
+  });
+
   useEffect(() => {
     localStorage.setItem('points', points.toString());
   }, [points]);
@@ -22,6 +28,10 @@ export const GameProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('myStickers', JSON.stringify(myStickers));
   }, [myStickers]);
+
+  useEffect(() => {
+      localStorage.setItem('myBadges', JSON.stringify(myBadges));
+  }, [myBadges]);
 
   const addPoints = (amount) => {
     setPoints((prev) => prev + amount);
@@ -36,6 +46,16 @@ export const GameProvider = ({ children }) => {
     return false;
   };
 
+  const unlockBadge = (badgeId) => {
+      if (!myBadges.includes(badgeId)) {
+          setMyBadges(prev => [...prev, badgeId]);
+          // Optional: Add bonus points for badge?
+          addPoints(50);
+          return true; // Unlocked
+      }
+      return false; // Already owned
+  };
+
   // Text to speech helper
   const speak = (text) => {
     if ('speechSynthesis' in window) {
@@ -48,7 +68,7 @@ export const GameProvider = ({ children }) => {
   };
 
   return (
-    <GameContext.Provider value={{ points, myStickers, addPoints, buySticker, speak }}>
+    <GameContext.Provider value={{ points, myStickers, myBadges, addPoints, buySticker, unlockBadge, speak, badgesData }}>
       {children}
     </GameContext.Provider>
   );

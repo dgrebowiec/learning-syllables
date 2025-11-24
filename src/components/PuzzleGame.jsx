@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { useGame } from '../context/GameContext';
 import { puzzleData } from '../data/newModes';
 import { calculateSimilarity } from '../utils/textUtils';
-import { Mic, Volume2, ArrowRight, Heart, Check } from 'lucide-react';
+import { Mic, Volume2, ArrowRight, Heart, Check, Keyboard } from 'lucide-react';
 import '../styles/App.css';
 
 const PuzzleGame = () => {
-  const { addPoints } = useGame();
+  const { addPoints, unlockBadge } = useGame();
   const [levelIndex, setLevelIndex] = useState(0);
-  const [stage, setStage] = useState('match'); // 'match', 'speak', 'write', 'reward'
+  const [stage, setStage] = useState('match'); // 'match', 'speak', 'write', 'rewrite', 'reward'
   const [selectedWord, setSelectedWord] = useState(null);
   const [isListening, setIsListening] = useState(false);
   const [writtenLetters, setWrittenLetters] = useState([]);
   const [availableLetters, setAvailableLetters] = useState([]);
+  const [rewriteInput, setRewriteInput] = useState('');
+  const [solvedCount, setSolvedCount] = useState(0);
 
   const currentLevel = puzzleData[levelIndex];
 
@@ -29,22 +31,19 @@ const PuzzleGame = () => {
     setStage('write');
   };
 
+  const startRewriteStage = () => {
+      setStage('rewrite');
+      setRewriteInput('');
+  };
+
   const handleMatch = (item) => {
     setSelectedWord(item);
-    // Simple visual match confirmation logic could go here
-    // For now, we assume matching means clicking the correct card among others?
-    // The prompt implies "Puzzle/Connection", let's make it simple:
-    // Just display the image, user clicks it to "connect" concepts, then moves to speech.
-
-    // In a more complex version, we'd have multiple images and words.
-    // Here we'll show the image and ask "Co to jest?".
     setStage('speak');
   };
 
   const startListening = () => {
       if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
         alert('Twoja przeglądarka nie obsługuje rozpoznawania mowy.');
-        setStage('write'); // Skip if no speech support
         startWriteStage();
         return;
       }
@@ -61,7 +60,6 @@ const PuzzleGame = () => {
         const text = event.results[0][0].transcript;
         const similarity = calculateSimilarity(text, currentLevel.word);
         if (similarity >= 0.6) {
-             // Good enough
              startWriteStage();
         } else {
             alert(`Słyszałem "${text}". Spróbuj jeszcze raz!`);
@@ -77,14 +75,27 @@ const PuzzleGame = () => {
     // Check if word is complete
     const currentString = [...writtenLetters, letterObj].map(l => l.char).join('');
     if (currentString === currentLevel.word) {
-      addPoints(5);
-      setStage('reward');
+      setTimeout(startRewriteStage, 1000);
     }
   };
 
   const removeLetter = (letterObj) => {
       setWrittenLetters(writtenLetters.filter(l => l.id !== letterObj.id));
       setAvailableLetters([...availableLetters, letterObj]);
+  };
+
+  const checkRewrite = () => {
+      if (rewriteInput.toLowerCase().trim() === currentLevel.word.toLowerCase()) {
+          addPoints(10);
+          setSolvedCount(prev => {
+              const newCount = prev + 1;
+              if (newCount >= 5) unlockBadge('puzzle_solver');
+              return newCount;
+          });
+          setStage('reward');
+      } else {
+          alert('Ups! Spróbuj przepisać dokładnie. ' + currentLevel.word);
+      }
   };
 
   const nextLevel = () => {
@@ -167,6 +178,32 @@ const PuzzleGame = () => {
                       </button>
                   ))}
               </div>
+          </div>
+      )}
+
+      {stage === 'rewrite' && (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+              <p style={{fontSize: '1.5rem'}}>Teraz przepisz to słowo:</p>
+              <div style={{ fontSize: '3rem', fontWeight: 'bold', color: '#3A0CA3', letterSpacing: '5px' }}>
+                  {currentLevel.word}
+              </div>
+              <input
+                type="text"
+                value={rewriteInput}
+                onChange={(e) => setRewriteInput(e.target.value)}
+                style={{
+                    fontSize: '2rem',
+                    padding: '0.5rem',
+                    borderRadius: '10px',
+                    border: '3px solid #4CC9F0',
+                    textAlign: 'center',
+                    width: '300px'
+                }}
+                placeholder="..."
+              />
+              <button className="action-btn" onClick={checkRewrite}>
+                  <Check /> Sprawdź
+              </button>
           </div>
       )}
     </div>
