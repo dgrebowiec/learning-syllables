@@ -4,8 +4,11 @@ import Learn from './components/Learn';
 import Quiz from './components/Quiz';
 import ConnectSoundQuiz from './components/ConnectSoundQuiz';
 import StickerBook from './components/StickerBook';
+import VoicePractice from './components/VoicePractice';
+import Logotherapy from './components/Logotherapy';
+import PuzzleGame from './components/PuzzleGame';
 import { letters, upperCaseLetters, syllables } from './data/content';
-import { Star, BookOpen, GraduationCap, Smile, Link as LinkIcon } from 'lucide-react';
+import { Star, BookOpen, GraduationCap, Smile, Link as LinkIcon, Mic, MessageCircle, Puzzle } from 'lucide-react';
 import './styles/App.css';
 
 const MainContent = () => {
@@ -29,6 +32,20 @@ const MainContent = () => {
               <BookOpen size={40} />
               <br />Sylaby
             </button>
+
+            <button className="menu-card" style={{ backgroundColor: '#F72585' }} onClick={() => setView('voice')}>
+              <Mic size={40} />
+              <br />Mówię!
+            </button>
+            <button className="menu-card" style={{ backgroundColor: '#3A0CA3' }} onClick={() => setView('logo')}>
+              <MessageCircle size={40} />
+              <br />Logopedia
+            </button>
+            <button className="menu-card" style={{ backgroundColor: '#4CC9F0', color: '#000' }} onClick={() => setView('puzzle')}>
+              <Puzzle size={40} />
+              <br />Puzzle
+            </button>
+
             <button className="menu-card" style={{ backgroundColor: '#FB8500' }} onClick={() => setView('stickers')}>
               <Smile size={40} />
               <br />Naklejki
@@ -79,6 +96,12 @@ const MainContent = () => {
         return <ConnectSoundQuiz data={syllables} title="Połącz: Sylaby" />;
       case 'stickers':
         return <StickerBook />;
+      case 'voice':
+        return <VoicePractice />;
+      case 'logo':
+        return <Logotherapy />;
+      case 'puzzle':
+        return <PuzzleGame />;
       default:
         return <div>Wybierz opcję</div>;
     }
