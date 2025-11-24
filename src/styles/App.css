@@ -262,3 +262,30 @@ button:active {
   right: 5px;
   color: #059669;
 }
+
+/* Letter Tiles */
+.letter-tile {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+  text-transform: uppercase;
+}
+
+.letter-tile.available {
+  background-color: #F72585; /* Pinkish */
+}
+
+.letter-tile.placeholder {
+  background-color: #ddd;
+  border: 2px dashed #999;
+  box-shadow: none;
+}

@@ -50,29 +50,41 @@ export const puzzleData = [
   {
     id: 'p1',
     word: 'KOT',
+    // Kot
+    imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=600&auto=format&fit=crop',
     imageEmoji: '🐱',
     parts: ['K', 'O', 'T'],
-    distractors: ['A', 'M', 'L']
+    distractors: ['A', 'M', 'L'],
+    gridSize: { rows: 2, cols: 2 } // 4 elements
   },
   {
     id: 'p2',
     word: 'DOM',
+    // Dom
+    imageUrl: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=600&auto=format&fit=crop',
     imageEmoji: '🏠',
     parts: ['D', 'O', 'M'],
-    distractors: ['K', 'E', 'P']
+    distractors: ['K', 'E', 'P'],
+    gridSize: { rows: 2, cols: 2 } // 4 elements
   },
   {
     id: 'p3',
     word: 'AUTO',
+    // Auto
+    imageUrl: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=600&auto=format&fit=crop',
     imageEmoji: '🚗',
     parts: ['A', 'U', 'T', 'O'],
-    distractors: ['K', 'B', 'S']
+    distractors: ['K', 'B', 'S'],
+    gridSize: { rows: 2, cols: 3 } // 6 elements
   },
   {
     id: 'p4',
     word: 'OKO',
+    // Oko
+    imageUrl: 'https://images.unsplash.com/photo-1589995635011-078e0bb91d11?q=80&w=600&auto=format&fit=crop',
     imageEmoji: '👁️',
     parts: ['O', 'K', 'O'],
-    distractors: ['A', 'L', 'M']
+    distractors: ['A', 'L', 'M'],
+    gridSize: { rows: 1, cols: 3 } // 3 elements
   },
 ];
