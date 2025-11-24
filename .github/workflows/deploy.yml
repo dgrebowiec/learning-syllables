@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # Upewnij się, że to nazwa Twojej głównej gałęzi (np. main lub master)
+    branches: [ main ] # Upewnij się, że to nazwa Twojej głównej gałęzi (np. main lub m aster)
 
 permissions:
   contents: read
