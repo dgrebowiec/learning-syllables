@@ -3,8 +3,9 @@ import { GameProvider, useGame } from './context/GameContext';
 import Learn from './components/Learn';
 import Quiz from './components/Quiz';
 import StickerBook from './components/StickerBook';
+import Speaking from './components/Speaking';
 import { letters, upperCaseLetters, syllables } from './data/content';
-import { Star, BookOpen, GraduationCap, Smile } from 'lucide-react';
+import { Star, BookOpen, GraduationCap, Smile, Mic } from 'lucide-react';
 import './styles/App.css';
 
 const MainContent = () => {
@@ -40,6 +41,14 @@ const MainContent = () => {
               <GraduationCap size={40} />
               <br />Quiz: Duże Litery
             </button>
+            <button className="menu-card" style={{ backgroundColor: '#8ECAE6', color: '#000' }} onClick={() => setView('speak-small')}>
+              <Mic size={40} />
+              <br />Mów: Małe Litery
+            </button>
+            <button className="menu-card" style={{ backgroundColor: '#8ECAE6', color: '#000' }} onClick={() => setView('speak-syl')}>
+              <Mic size={40} />
+              <br />Mów: Sylaby
+            </button>
           </div>
         );
       case 'learn-small':
@@ -52,6 +61,10 @@ const MainContent = () => {
         return <Quiz data={letters} title="Zgadnij Małą Literę" />;
       case 'quiz-big':
         return <Quiz data={upperCaseLetters} title="Zgadnij Dużą Literę" />;
+      case 'speak-small':
+        return <Speaking data={letters} title="Mówienie: Małe Litery" />;
+      case 'speak-syl':
+        return <Speaking data={syllables} title="Mówienie: Sylaby" />;
       case 'stickers':
         return <StickerBook />;
       default:
