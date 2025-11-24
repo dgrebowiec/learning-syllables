@@ -1,0 +1,55 @@
+import React, { createContext, useState, useEffect, useContext } from 'react';
+
+const GameContext = createContext();
+
+export const useGame = () => useContext(GameContext);
+
+export const GameProvider = ({ children }) => {
+  const [points, setPoints] = useState(() => {
+    const saved = localStorage.getItem('points');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
+  const [myStickers, setMyStickers] = useState(() => {
+    const saved = localStorage.getItem('myStickers');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('points', points.toString());
+  }, [points]);
+
+  useEffect(() => {
+    localStorage.setItem('myStickers', JSON.stringify(myStickers));
+  }, [myStickers]);
+
+  const addPoints = (amount) => {
+    setPoints((prev) => prev + amount);
+  };
+
+  const buySticker = (sticker) => {
+    if (points >= sticker.cost && !myStickers.some(s => s.id === sticker.id)) {
+      setPoints((prev) => prev - sticker.cost);
+      setMyStickers((prev) => [...prev, sticker]);
+      return true;
+    }
+    return false;
+  };
+
+  // Text to speech helper
+  const speak = (text) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // Stop previous speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'pl-PL';
+      utterance.rate = 0.8; // Slightly slower for kids
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  return (
+    <GameContext.Provider value={{ points, myStickers, addPoints, buySticker, speak }}>
+      {children}
+    </GameContext.Provider>
+  );
+};

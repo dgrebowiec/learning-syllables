@@ -1,0 +1,55 @@
+export const letters = [
+  { id: 'a', char: 'a', type: 'vowel', sound: 'a' },
+  { id: 'b', char: 'b', type: 'consonant', sound: 'be' },
+  { id: 'c', char: 'c', type: 'consonant', sound: 'ce' },
+  { id: 'd', char: 'd', type: 'consonant', sound: 'de' },
+  { id: 'e', char: 'e', type: 'vowel', sound: 'e' },
+  { id: 'f', char: 'f', type: 'consonant', sound: 'ef' },
+  { id: 'g', char: 'g', type: 'consonant', sound: 'gie' },
+  { id: 'h', char: 'h', type: 'consonant', sound: 'ha' },
+  { id: 'i', char: 'i', type: 'vowel', sound: 'i' },
+  { id: 'j', char: 'j', type: 'consonant', sound: 'jot' },
+  { id: 'k', char: 'k', type: 'consonant', sound: 'ka' },
+  { id: 'l', char: 'l', type: 'consonant', sound: 'el' },
+  { id: 'm', char: 'm', type: 'consonant', sound: 'em' },
+  { id: 'n', char: 'n', type: 'consonant', sound: 'en' },
+  { id: 'o', char: 'o', type: 'vowel', sound: 'o' },
+  { id: 'p', char: 'p', type: 'consonant', sound: 'pe' },
+  { id: 'r', char: 'r', type: 'consonant', sound: 'er' },
+  { id: 's', char: 's', type: 'consonant', sound: 'es' },
+  { id: 't', char: 't', type: 'consonant', sound: 'te' },
+  { id: 'u', char: 'u', type: 'vowel', sound: 'u' },
+  { id: 'w', char: 'w', type: 'consonant', sound: 'wu' },
+  { id: 'y', char: 'y', type: 'vowel', sound: 'y' },
+  { id: 'z', char: 'z', type: 'consonant', sound: 'zet' },
+];
+
+export const upperCaseLetters = letters.map(l => ({ ...l, char: l.char.toUpperCase() }));
+
+export const syllables = [
+  { id: 'ma', char: 'ma', type: 'syllable' },
+  { id: 'me', char: 'me', type: 'syllable' },
+  { id: 'mi', char: 'mi', type: 'syllable' },
+  { id: 'mo', char: 'mo', type: 'syllable' },
+  { id: 'mu', char: 'mu', type: 'syllable' },
+  { id: 'ta', char: 'ta', type: 'syllable' },
+  { id: 'te', char: 'te', type: 'syllable' },
+  { id: 'to', char: 'to', type: 'syllable' },
+  { id: 'la', char: 'la', type: 'syllable' },
+  { id: 'le', char: 'le', type: 'syllable' },
+  { id: 'li', char: 'li', type: 'syllable' },
+  { id: 'da', char: 'da', type: 'syllable' },
+  { id: 'ka', char: 'ka', type: 'syllable' },
+  { id: 'ba', char: 'ba', type: 'syllable' },
+];
+
+export const stickers = [
+  { id: 'star', emoji: '⭐', cost: 5, name: 'Gwiazdka' },
+  { id: 'heart', emoji: '❤️', cost: 10, name: 'Serduszko' },
+  { id: 'rocket', emoji: '🚀', cost: 20, name: 'Rakieta' },
+  { id: 'cat', emoji: '🐱', cost: 15, name: 'Kotek' },
+  { id: 'dog', emoji: '🐶', cost: 15, name: 'Piesek' },
+  { id: 'sun', emoji: '☀️', cost: 10, name: 'Słońce' },
+  { id: 'flower', emoji: '🌸', cost: 10, name: 'Kwiatek' },
+  { id: 'car', emoji: '🚗', cost: 20, name: 'Auto' },
+];
