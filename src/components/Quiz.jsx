@@ -1,101 +1,110 @@
 import React, { useState, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
-import { Volume2 } from 'lucide-react';
+import { CaseSensitive } from 'lucide-react';
 
 const Quiz = ({ data, title }) => {
-  const { addPoints, speak } = useGame();
-  const [question, setQuestion] = useState(null);
+  const { addPoints, speak, unlockBadge } = useGame();
+  const [currentQuestion, setCurrentQuestion] = useState(null);
   const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [isCorrect, setIsCorrect] = useState(null);
-  const [feedback, setFeedback] = useState('');
+  const [score, setScore] = useState(0);
+  const [message, setMessage] = useState('');
+  const [useUpperCase, setUseUpperCase] = useState(false);
 
-  const generateQuestion = () => {
-    // Pick a random item as the question
+  useEffect(() => {
+    startNewQuestion();
+  }, [data]); // Reset if data changes
+
+  // Re-generate options if case changes, keeping the same question target
+  useEffect(() => {
+      if (currentQuestion) {
+          // We need to re-render the options with new case
+          // Logic is simple: just re-render.
+          // But `options` state contains objects.
+      }
+  }, [useUpperCase]);
+
+  const startNewQuestion = () => {
     const randomIndex = Math.floor(Math.random() * data.length);
-    const target = data[randomIndex];
+    const correct = data[randomIndex];
 
-    // Pick 3 other random distractors
-    const distractors = [];
-    while (distractors.length < 3) {
+    // Generate 2 distractors
+    let distractors = [];
+    while (distractors.length < 2) {
       const r = Math.floor(Math.random() * data.length);
       if (r !== randomIndex && !distractors.includes(data[r])) {
         distractors.push(data[r]);
       }
     }
 
-    const allOptions = [target, ...distractors].sort(() => Math.random() - 0.5);
-
-    setQuestion(target);
+    const allOptions = [correct, ...distractors].sort(() => Math.random() - 0.5);
+    setCurrentQuestion(correct);
     setOptions(allOptions);
-    setSelectedOption(null);
-    setIsCorrect(null);
-    setFeedback('Posłuchaj i wybierz!');
+    setMessage('');
 
-    // Auto speak the question with a slight delay
+    // Auto-play sound
     setTimeout(() => {
-       speak(`Gdzie jest ${target.sound || target.char}?`);
+        speak(`Znajdź: ${correct.sound || correct.char}`);
     }, 500);
   };
 
-  useEffect(() => {
-    generateQuestion();
-  }, [data]);
-
   const handleOptionClick = (option) => {
-    if (isCorrect === true) return; // Prevent clicking after success
-
-    setSelectedOption(option);
-
-    if (option.id === question.id) {
-      setIsCorrect(true);
-      setFeedback('Brawo! Super!');
-      speak('Brawo!');
-      addPoints(1); // Reward
-
-      // Auto next question after delay
-      setTimeout(() => {
-        generateQuestion();
-      }, 2000);
+    if (option.id === currentQuestion.id) {
+      setMessage('Super! 🎉');
+      addPoints(1);
+      setScore(s => {
+          const newScore = s + 1;
+          if (newScore >= 100) unlockBadge('quiz_wiz');
+          return newScore;
+      });
+      speak('Dobrze!');
+      setTimeout(startNewQuestion, 1500);
     } else {
-      setIsCorrect(false);
-      setFeedback('Spróbuj jeszcze raz!');
-      speak('Oj, spróbuj jeszcze raz.');
+      setMessage('Spróbuj jeszcze raz... 🤔');
+      speak('Nie, to nie to.');
     }
   };
 
-  const repeatQuestion = () => {
-    if (question) {
-       speak(`Gdzie jest ${question.sound || question.char}?`);
-    }
+  const getDisplayChar = (item) => {
+      return useUpperCase ? item.char.toUpperCase() : item.char;
   };
 
-  if (!question) return <div>Ładowanie...</div>;
+  if (!currentQuestion) return <div>Ładowanie...</div>;
 
   return (
-    <div className="quiz-container" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <div className="quiz-container">
       <h2>{title}</h2>
 
-      <button onClick={repeatQuestion} className="control-btn" style={{ marginBottom: '1rem' }}>
-        <Volume2 size={40} />
+       <button
+        onClick={() => setUseUpperCase(!useUpperCase)}
+        className="nav-btn"
+        style={{ marginBottom: '1rem', fontSize: '0.8rem', padding: '0.5rem' }}
+      >
+        <CaseSensitive size={16} /> {useUpperCase ? 'Zmień na małe' : 'Zmień na duże'}
       </button>
 
-      <div className="feedback-msg">{feedback}</div>
+      <div className="score-board">Punkty: {score}</div>
 
-      <div className="quiz-options">
+      <div style={{ margin: '1rem', fontSize: '1.2rem' }}>
+        Gdzie jest: <strong>{currentQuestion.sound || currentQuestion.char}</strong>?
+      </div>
+
+      <button className="action-btn" onClick={() => speak(currentQuestion.sound || currentQuestion.char)}>
+         🔊 Powtórz
+      </button>
+
+      <div className="options-grid">
         {options.map((opt) => (
           <button
             key={opt.id}
-            className={`quiz-btn
-              ${selectedOption === opt && isCorrect === true ? 'correct' : ''}
-              ${selectedOption === opt && isCorrect === false ? 'wrong' : ''}
-            `}
+            className="option-card"
             onClick={() => handleOptionClick(opt)}
           >
-            {opt.char}
+            {getDisplayChar(opt)}
           </button>
         ))}
       </div>
+
+      {message && <div className="feedback-msg">{message}</div>}
     </div>
   );
 };

@@ -52,4 +52,28 @@ export const stickers = [
   { id: 'sun', emoji: '☀️', cost: 10, name: 'Słońce' },
   { id: 'flower', emoji: '🌸', cost: 10, name: 'Kwiatek' },
   { id: 'car', emoji: '🚗', cost: 20, name: 'Auto' },
+  { id: 'bear', emoji: '🐻', cost: 15, name: 'Miś' },
+  { id: 'fox', emoji: '🦊', cost: 20, name: 'Lisek' },
+  { id: 'frog', emoji: '🐸', cost: 15, name: 'Żabka' },
+  { id: 'panda', emoji: '🐼', cost: 25, name: 'Panda' },
+  { id: 'lion', emoji: '🦁', cost: 30, name: 'Lew' },
+  { id: 'tiger', emoji: '🐯', cost: 30, name: 'Tygrys' },
+  { id: 'unicorn', emoji: '🦄', cost: 50, name: 'Jednorożec' },
+  { id: 'dragon', emoji: '🐉', cost: 50, name: 'Smok' },
+  { id: 'rainbow', emoji: '🌈', cost: 25, name: 'Tęcza' },
+  { id: 'pizza', emoji: '🍕', cost: 10, name: 'Pizza' },
+  { id: 'icecream', emoji: '🍦', cost: 10, name: 'Lody' },
+  { id: 'cookie', emoji: '🍪', cost: 5, name: 'Ciastko' },
+  { id: 'ball', emoji: '⚽', cost: 15, name: 'Piłka' },
+  { id: 'medal', emoji: '🥇', cost: 30, name: 'Medal' },
+  { id: 'trophy', emoji: '🏆', cost: 50, name: 'Puchar' },
+  { id: 'crown', emoji: '👑', cost: 100, name: 'Korona' },
+];
+
+export const badges = [
+    { id: 'master_small', name: 'Mistrz Małych Liter', icon: 'abc', description: 'Ukończono naukę małych liter' },
+    { id: 'master_big', name: 'Mistrz Dużych Liter', icon: 'ABC', description: 'Ukończono naukę dużych liter' },
+    { id: 'master_syllables', name: 'Mistrz Sylab', icon: 'MaMe', description: 'Poznano sylaby' },
+    { id: 'puzzle_solver', name: 'Mistrz Puzzli', icon: '🧩', description: 'Ułożono 5 słów' },
+    { id: 'quiz_wiz', name: 'Omnibus', icon: '🎓', description: 'Zdobyto 100 punktów w quizach' }
 ];
