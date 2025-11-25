@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { badges as badgesData } from '../data/content';
+import { badges as badgesData, stickers } from '../data/content';
 
 const GameContext = createContext();
 
@@ -21,6 +21,10 @@ export const GameProvider = ({ children }) => {
       return saved ? JSON.parse(saved) : [];
   });
 
+  const [ageGroup, setAgeGroupInternal] = useState(() => {
+    return localStorage.getItem('ageGroup');
+  });
+
   useEffect(() => {
     localStorage.setItem('points', points.toString());
   }, [points]);
@@ -32,6 +36,11 @@ export const GameProvider = ({ children }) => {
   useEffect(() => {
       localStorage.setItem('myBadges', JSON.stringify(myBadges));
   }, [myBadges]);
+
+  const setAgeGroup = (group) => {
+    localStorage.setItem('ageGroup', group);
+    setAgeGroupInternal(group);
+  };
 
   const addPoints = (amount) => {
     setPoints((prev) => prev + amount);
@@ -56,6 +65,16 @@ export const GameProvider = ({ children }) => {
       return false; // Already owned
   };
 
+  const unlockStickerByCategory = (category) => {
+    const stickersToUnlock = stickers.filter(s => s.category === category && !myStickers.some(ms => ms.id === s.id));
+    if (stickersToUnlock.length > 0) {
+      setMyStickers(prev => [...prev, ...stickersToUnlock]);
+      addPoints(25 * stickersToUnlock.length); // Bonus points
+      return true;
+    }
+    return false;
+  };
+
   // Text to speech helper
   const speak = (text) => {
     if ('speechSynthesis' in window) {
@@ -68,7 +87,7 @@ export const GameProvider = ({ children }) => {
   };
 
   return (
-    <GameContext.Provider value={{ points, myStickers, myBadges, addPoints, buySticker, unlockBadge, speak, badgesData }}>
+    <GameContext.Provider value={{ points, myStickers, myBadges, ageGroup, setAgeGroup, addPoints, buySticker, unlockBadge, unlockStickerByCategory, speak, badgesData }}>
       {children}
     </GameContext.Provider>
   );
