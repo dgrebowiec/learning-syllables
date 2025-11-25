@@ -7,35 +7,92 @@ import StickerBook from './components/StickerBook';
 import VoicePractice from './components/VoicePractice';
 import Logotherapy from './components/Logotherapy';
 import PuzzleGame from './components/PuzzleGame';
+import MissingLetter from './components/MissingLetter';
+import SentenceBuilder from './components/SentenceBuilder';
+import ListenWrite from './components/ListenWrite';
 import { letters, upperCaseLetters, syllables } from './data/content';
-import { Star, BookOpen, GraduationCap, Smile, Link as LinkIcon, Mic, MessageCircle, Puzzle, ArrowLeft, Trophy } from 'lucide-react';
+import { firstGradeData } from './data/firstGradeData';
+import { Star, BookOpen, GraduationCap, Smile, Link as LinkIcon, Mic, MessageCircle, Puzzle, ArrowLeft, Trophy, Edit3, MessageSquare, Music } from 'lucide-react';
 import './styles/App.css';
 
 const MainContent = () => {
-  const { points } = useGame();
-  const [view, setView] = useState('menu'); // menu, menu-learn, menu-quiz, learn-small...
+  const { points, ageGroup, setAgeGroup } = useGame();
+  const [view, setView] = useState(ageGroup ? 'menu' : 'age-gate');
+  const [gameOptions, setGameOptions] = useState(null);
 
-  // Helper to render a submenu or content
+  const handleSetAgeGroup = (group) => {
+    setAgeGroup(group);
+    setView('menu');
+  };
+
+  const startGame = (game, options) => {
+    setGameOptions(options);
+    setView(game);
+  };
+
+  const renderAgeGate = () => (
+    <div className="menu-grid">
+      <button className="menu-card" style={{ backgroundColor: '#4CC9F0', color: '#000' }} onClick={() => handleSetAgeGroup('preschool')}>
+        <Smile size={40} />
+        <br />Przedszkolak
+      </button>
+      <button className="menu-card" style={{ backgroundColor: '#F72585' }} onClick={() => handleSetAgeGroup('first-grade')}>
+        <GraduationCap size={40} />
+        <br />Pierwszoklasista
+      </button>
+    </div>
+  );
+
+  const renderPreschoolMenu = () => (
+    <div className="menu-grid">
+      <button className="menu-card" style={{ backgroundColor: '#4CC9F0', color: '#000' }} onClick={() => setView('menu-learn')}>
+        <BookOpen size={40} />
+        <br />Nauka i Ćwiczenia
+      </button>
+      <button className="menu-card" style={{ backgroundColor: '#F72585' }} onClick={() => setView('menu-quiz')}>
+        <GraduationCap size={40} />
+        <br />Quizy i Zadania
+      </button>
+      <button className="menu-card" style={{ backgroundColor: '#FB8500' }} onClick={() => setView('stickers')}>
+        <Smile size={40} />
+        <br />Naklejki i Nagrody
+      </button>
+    </div>
+  );
+
+  const renderFirstGradeMenu = () => (
+    <div className="menu-grid">
+      <button className="menu-card" onClick={() => startGame('missing-letter', { data: firstGradeData.missingLetter, category: 'nouns', subcategory: 'fruits' })}>
+        <Edit3 size={40} />
+        <br />Uzupełnij Litery
+      </button>
+      <button className="menu-card" onClick={() => startGame('sentence-builder', { data: firstGradeData.sentenceBuilder, category: 'general' })}>
+        <MessageSquare size={40} />
+        <br />Ułóż Zdania
+      </button>
+      <button className="menu-card" onClick={() => startGame('listen-write', { data: firstGradeData.listenWrite, level: 1 })}>
+        <Music size={40} />
+        <br />Napisz ze Słuchu
+      </button>
+    </div>
+  );
+
   const renderContent = () => {
+    if (view === 'age-gate') return renderAgeGate();
+
     switch (view) {
-      // --- MAIN MENU ---
       case 'menu':
-        return (
-          <div className="menu-grid">
-            <button className="menu-card" style={{ backgroundColor: '#4CC9F0', color: '#000' }} onClick={() => setView('menu-learn')}>
-              <BookOpen size={40} />
-              <br />Nauka i Ćwiczenia
-            </button>
-            <button className="menu-card" style={{ backgroundColor: '#F72585' }} onClick={() => setView('menu-quiz')}>
-              <GraduationCap size={40} />
-              <br />Quizy i Zadania
-            </button>
-            <button className="menu-card" style={{ backgroundColor: '#FB8500' }} onClick={() => setView('stickers')}>
-              <Smile size={40} />
-              <br />Naklejki i Nagrody
-            </button>
-          </div>
-        );
+        if (ageGroup === 'preschool') return renderPreschoolMenu();
+        if (ageGroup === 'first-grade') return renderFirstGradeMenu();
+        return renderAgeGate();
+
+      // First Grade Games
+      case 'missing-letter':
+        return <MissingLetter {...gameOptions} onComplete={() => setView('menu')} />;
+      case 'sentence-builder':
+        return <SentenceBuilder {...gameOptions} onComplete={() => setView('menu')} />;
+      case 'listen-write':
+        return <ListenWrite {...gameOptions} onComplete={() => setView('menu')} />;
 
       // --- SUBMENU: NAUKA ---
       case 'menu-learn':
@@ -80,7 +137,6 @@ const MainContent = () => {
               <GraduationCap size={40} />
               <br />Quiz: Małe
             </button>
-             {/* Merged logic could go here, but keeping separate buttons is clearer for kids if we have space now */}
             <button className="menu-card" style={{ backgroundColor: '#FFB703', color: '#000' }} onClick={() => setView('quiz-big')}>
               <GraduationCap size={40} />
               <br />Quiz: Duże
@@ -144,8 +200,15 @@ const MainContent = () => {
     <>
       <header className="header">
         <div style={{ cursor: 'pointer' }} onClick={() => setView('menu')}>🦉 Mądra Sowa</div>
-        <div className="points-badge">
-          {points} <Star size={20} style={{ display: 'inline', verticalAlign: 'middle' }} fill="#FB8500" />
+        <div>
+          {ageGroup && (
+            <button className="change-age-btn" onClick={() => setView('age-gate')}>
+              {ageGroup === 'preschool' ? <Smile size={20} /> : <GraduationCap size={20} />}
+            </button>
+          )}
+          <span className="points-badge">
+            {points} <Star size={20} style={{ display: 'inline', verticalAlign: 'middle' }} fill="#FB8500" />
+          </span>
         </div>
       </header>
 
