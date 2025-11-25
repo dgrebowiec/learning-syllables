@@ -68,6 +68,15 @@ export const stickers = [
   { id: 'medal', emoji: '🥇', cost: 30, name: 'Medal' },
   { id: 'trophy', emoji: '🏆', cost: 50, name: 'Puchar' },
   { id: 'crown', emoji: '👑', cost: 100, name: 'Korona' },
+  // First Grade Stickers
+  { id: 'apple', emoji: '🍎', cost: 15, name: 'Jabłko', category: 'fruits' },
+  { id: 'banana', emoji: '🍌', cost: 15, name: 'Banan', category: 'fruits' },
+  { id: 'strawberry', emoji: '🍓', cost: 20, name: 'Truskawka', category: 'fruits' },
+  { id: 'carrot', emoji: '🥕', cost: 15, name: 'Marchewka', category: 'vegetables' },
+  { id: 'tomato', emoji: '🍅', cost: 15, name: 'Pomidor', category: 'vegetables' },
+  { id: 'doll', emoji: '🎎', cost: 25, name: 'Lalka', category: 'toys' },
+  { id: 'teddy-bear', emoji: '🧸', cost: 25, name: 'Miś', category: 'toys' },
+  { id: 'toy-car', emoji: '🏎️', cost: 25, name: 'Wyścigówka', category: 'toys' },
 ];
 
 export const badges = [
