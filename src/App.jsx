@@ -7,8 +7,11 @@ import StickerBook from './components/StickerBook';
 import VoicePractice from './components/VoicePractice';
 import Logotherapy from './components/Logotherapy';
 import PuzzleGame from './components/PuzzleGame';
+import SentenceBuilder from './components/SentenceBuilder';
+import FillInTheBlank from './components/FillInTheBlank';
 import { letters, upperCaseLetters, syllables } from './data/content';
-import { Star, BookOpen, GraduationCap, Smile, Link as LinkIcon, Mic, MessageCircle, Puzzle, ArrowLeft, Trophy } from 'lucide-react';
+import { sentenceBuilderData, fillInBlankData } from './data/grade2';
+import { Star, BookOpen, GraduationCap, Smile, Link as LinkIcon, Mic, MessageCircle, Puzzle, ArrowLeft, Trophy, PenTool } from 'lucide-react';
 import './styles/App.css';
 
 const MainContent = () => {
@@ -30,9 +33,32 @@ const MainContent = () => {
               <GraduationCap size={40} />
               <br />Quizy i Zadania
             </button>
+            <button className="menu-card" style={{ backgroundColor: '#7209B7', color: 'white' }} onClick={() => setView('menu-grade2')}>
+              <PenTool size={40} />
+              <br />Klasa 2
+            </button>
             <button className="menu-card" style={{ backgroundColor: '#FB8500' }} onClick={() => setView('stickers')}>
               <Smile size={40} />
               <br />Naklejki i Nagrody
+            </button>
+          </div>
+        );
+
+      // --- SUBMENU: KLASA 2 ---
+      case 'menu-grade2':
+        return (
+          <div className="menu-grid">
+            <button className="menu-card" onClick={() => setView('menu')}>
+              <ArrowLeft size={40} />
+              <br />Wróć
+            </button>
+            <button className="menu-card" style={{ backgroundColor: '#4CC9F0' }} onClick={() => setView('sentence-builder')}>
+              <PenTool size={40} />
+              <br />Budowanie Zdań
+            </button>
+            <button className="menu-card" style={{ backgroundColor: '#F72585' }} onClick={() => setView('fill-blanks')}>
+              <PenTool size={40} />
+              <br />Uzupełnianki
             </button>
           </div>
         );
@@ -135,6 +161,10 @@ const MainContent = () => {
         return <Logotherapy />;
       case 'puzzle':
         return <PuzzleGame />;
+      case 'sentence-builder':
+        return <SentenceBuilder data={sentenceBuilderData} onBack={() => setView('menu-grade2')} />;
+      case 'fill-blanks':
+        return <FillInTheBlank data={fillInBlankData} onBack={() => setView('menu-grade2')} />;
       default:
         return <div>Wybierz opcję</div>;
     }
