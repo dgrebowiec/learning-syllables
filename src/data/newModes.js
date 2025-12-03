@@ -11,6 +11,26 @@ export const voiceWords = [
   { id: 'oko', word: 'oko', emoji: '👁️' },
   { id: 'nos', word: 'nos', emoji: '👃' },
   { id: 'ucho', word: 'ucho', emoji: '👂' },
+  { id: 'ręka', word: 'ręka', emoji: '🤚' },
+  { id: 'noga', word: 'noga', emoji: '🦶' },
+  { id: 'zupa', word: 'zupa', emoji: '🍲' },
+  { id: 'woda', word: 'woda', emoji: '💧' },
+  { id: 'sok', word: 'sok', emoji: '🧃' },
+  { id: 'kura', word: 'kura', emoji: '🐔' },
+  { id: 'jajko', word: 'jajko', emoji: '🥚' },
+  { id: 'miś', word: 'miś', emoji: '🧸' },
+  { id: 'balon', word: 'balon', emoji: '🎈' },
+  { id: 'lody', word: 'lody', emoji: '🍦' },
+  { id: 'ryba', word: 'ryba', emoji: '🐟' },
+  { id: 'ser', word: 'ser', emoji: '🧀' },
+  { id: 'bułka', word: 'bułka', emoji: '🥖' },
+  { id: 'krowa', word: 'krowa', emoji: '🐮' },
+  { id: 'koń', word: 'koń', emoji: '🐴' },
+  { id: 'owca', word: 'owca', emoji: '🐑' },
+  { id: 'koza', word: 'koza', emoji: '🐐' },
+  { id: 'szkoła', word: 'szkoła', emoji: '🏫' },
+  { id: 'kreda', word: 'kreda', emoji: '🖍️' },
+  { id: 'okno', word: 'okno', emoji: '🪟' },
 ];
 
 export const logotherapyExercises = [
@@ -87,4 +107,76 @@ export const puzzleData = [
     distractors: ['A', 'L', 'M'],
     gridSize: { rows: 1, cols: 3 } // 3 elements
   },
+  {
+    id: 'p5',
+    word: 'PIES',
+    imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🐶',
+    parts: ['P', 'I', 'E', 'S'],
+    distractors: ['L', 'O', 'K'],
+    gridSize: { rows: 2, cols: 2 }
+  },
+  {
+    id: 'p6',
+    word: 'LAS',
+    imageUrl: 'https://images.unsplash.com/photo-1448375240586-dfd8f3793300?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🌲',
+    parts: ['L', 'A', 'S'],
+    distractors: ['K', 'O', 'T'],
+    gridSize: { rows: 1, cols: 3 }
+  },
+  {
+    id: 'p7',
+    word: 'KWIAT',
+    imageUrl: 'https://images.unsplash.com/photo-1490750967868-58cb75069ed6?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🌸',
+    parts: ['K', 'W', 'I', 'A', 'T'],
+    distractors: ['O', 'S', 'Z'],
+    gridSize: { rows: 2, cols: 3 }
+  },
+  {
+    id: 'p8',
+    word: 'SŁOŃ',
+    imageUrl: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🐘',
+    parts: ['S', 'Ł', 'O', 'Ń'],
+    distractors: ['A', 'K', 'M'],
+    gridSize: { rows: 2, cols: 2 }
+  },
+  {
+    id: 'p9',
+    word: 'LODY',
+    imageUrl: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🍦',
+    parts: ['L', 'O', 'D', 'Y'],
+    distractors: ['K', 'A', 'S'],
+    gridSize: { rows: 2, cols: 2 }
+  },
+  {
+    id: 'p10',
+    word: 'ZEGAR',
+    imageUrl: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '⏰',
+    parts: ['Z', 'E', 'G', 'A', 'R'],
+    distractors: ['O', 'T', 'L'],
+    gridSize: { rows: 2, cols: 3 }
+  },
+  {
+    id: 'p11',
+    word: 'MIŚ',
+    imageUrl: 'https://images.unsplash.com/photo-1559454403-b8fb88521f11?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🧸',
+    parts: ['M', 'I', 'Ś'],
+    distractors: ['A', 'K', 'O'],
+    gridSize: { rows: 1, cols: 3 }
+  },
+  {
+    id: 'p12',
+    word: 'PIŁKA',
+    imageUrl: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '⚽',
+    parts: ['P', 'I', 'Ł', 'K', 'A'],
+    distractors: ['O', 'S', 'M'],
+    gridSize: { rows: 2, cols: 3 }
+  }
 ];

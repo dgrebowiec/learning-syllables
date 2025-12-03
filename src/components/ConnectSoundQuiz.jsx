@@ -78,11 +78,20 @@ const ConnectSoundQuiz = ({ data, title }) => {
                  <button
                     key={`sound-${item.id}`}
                     className="action-btn"
-                    style={{ backgroundColor: matched.includes(item.id) ? '#ccc' : (selected?.id === item.id ? '#FFB703' : '#3A0CA3') }}
+                    style={{
+                        backgroundColor: matched.includes(item.id)
+                            ? '#ADB5BD' // Grey for matched
+                            : (selected?.id === item.id ? '#FFD60A' : '#4361EE'), // Yellow for selected, Blue for default
+                        borderColor: selected?.id === item.id ? '#000' : 'transparent',
+                        borderWidth: '2px',
+                        borderStyle: 'solid',
+                        transform: selected?.id === item.id ? 'scale(1.05)' : 'scale(1)',
+                        transition: 'all 0.2s'
+                    }}
                     onClick={() => !matched.includes(item.id) && handlePlaySound(item)}
                     disabled={matched.includes(item.id)}
                  >
-                     🔊 ???
+                     {matched.includes(item.id) ? '✅' : '🔊 ???'}
                  </button>
              ))}
         </div>
@@ -94,8 +103,12 @@ const ConnectSoundQuiz = ({ data, title }) => {
                     key={`char-${item.id}`}
                     className="option-card"
                     style={{
-                        opacity: matched.includes(item.id) ? 0.5 : 1,
-                        backgroundColor: matched.includes(item.id) ? '#8D99AE' : '#F72585'
+                        opacity: matched.includes(item.id) ? 0.6 : 1,
+                        backgroundColor: matched.includes(item.id)
+                            ? '#ADB5BD'
+                            : '#7209B7', // Purple for options
+                        color: 'white',
+                        border: matched.includes(item.id) ? '2px solid #52B788' : 'none',
                     }}
                     onClick={() => !matched.includes(item.id) && handleMatch(item)}
                 >
