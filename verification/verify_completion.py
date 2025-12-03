@@ -17,7 +17,7 @@ def run(playwright):
 
     print("Attempting to solve all questions...")
 
-    max_attempts = 15 # increased limit
+    max_attempts = 40 # increased limit to cover 25 items
     for i in range(max_attempts):
         if page.locator("text=Gratulacje!").is_visible():
             print("Completion screen reached!")
@@ -43,7 +43,7 @@ def run(playwright):
                 check_btn.click()
 
             # Check for feedback
-            page.wait_for_timeout(200) # wait for react update
+            page.wait_for_timeout(100) # faster wait
             if page.locator(".feedback.correct").is_visible():
                 print(f"Question {i+1} solved.")
                 found_correct = True

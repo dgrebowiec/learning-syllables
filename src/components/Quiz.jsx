@@ -57,6 +57,7 @@ const Quiz = ({ data, title }) => {
           return newScore;
       });
       speak('Dobrze!');
+      // Add a temporary success class logic if needed, but message is good for now.
       setTimeout(startNewQuestion, 1500);
     } else {
       setMessage('Spróbuj jeszcze raz... 🤔');
@@ -66,6 +67,12 @@ const Quiz = ({ data, title }) => {
 
   const getDisplayChar = (item) => {
       return useUpperCase ? item.char.toUpperCase() : item.char;
+  };
+
+  // Helper for varied colors
+  const getCardColor = (index) => {
+    const colors = ['#F72585', '#4CC9F0', '#7209B7', '#F3722C', '#4361EE'];
+    return colors[index % colors.length];
   };
 
   if (!currentQuestion) return <div>Ładowanie...</div>;
@@ -93,10 +100,16 @@ const Quiz = ({ data, title }) => {
       </button>
 
       <div className="options-grid">
-        {options.map((opt) => (
+        {options.map((opt, idx) => (
           <button
             key={opt.id}
             className="option-card"
+            style={{
+                backgroundColor: message.includes('Super') && opt.id === currentQuestion.id ? '#38B000' : getCardColor(idx),
+                color: 'white',
+                transform: message.includes('Super') && opt.id === currentQuestion.id ? 'scale(1.1)' : 'scale(1)',
+                transition: 'all 0.3s'
+            }}
             onClick={() => handleOptionClick(opt)}
           >
             {getDisplayChar(opt)}
@@ -104,7 +117,12 @@ const Quiz = ({ data, title }) => {
         ))}
       </div>
 
-      {message && <div className="feedback-msg">{message}</div>}
+      {message && <div className="feedback-msg" style={{
+          color: message.includes('Super') ? '#38B000' : '#D00000',
+          fontSize: '1.5rem',
+          fontWeight: 'bold',
+          marginTop: '1rem'
+      }}>{message}</div>}
     </div>
   );
 };
