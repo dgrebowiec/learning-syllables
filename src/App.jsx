@@ -35,7 +35,7 @@ const MainContent = () => {
             </button>
             <button className="menu-card" style={{ backgroundColor: '#7209B7', color: 'white' }} onClick={() => setView('menu-grade2')}>
               <PenTool size={40} />
-              <br />Klasa 2
+              <br />Szkoła
             </button>
             <button className="menu-card" style={{ backgroundColor: '#FB8500' }} onClick={() => setView('stickers')}>
               <Smile size={40} />

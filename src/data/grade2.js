@@ -29,6 +29,24 @@ export const sentenceBuilderData = [
     sentence: 'Zima jest zimna',
     scramble: ['jest', 'zimna', 'Zima'],
     audio: 'zima_jest_zimna'
+  },
+  {
+    id: 's6',
+    sentence: 'Książka leży na stole',
+    scramble: ['stole', 'na', 'leży', 'Książka'],
+    audio: 'ksiazka_lezy'
+  },
+  {
+    id: 's7',
+    sentence: 'Wiosną kwitną kwiaty',
+    scramble: ['kwiaty', 'kwitną', 'Wiosną'],
+    audio: 'wiosna_kwitna'
+  },
+  {
+    id: 's8',
+    sentence: 'Ptak lata wysoko',
+    scramble: ['wysoko', 'lata', 'Ptak'],
+    audio: 'ptak_lata'
   }
 ];
 
@@ -83,5 +101,31 @@ export const fillInBlankData = [
     options: ['ó', 'u', 'o'],
     fullWord: 'Góra',
     image: '🏔️'
+  },
+  {
+    id: 'f7',
+    type: 'word',
+    question: 'M_rze',
+    answer: 'o',
+    options: ['o', 'u', 'ó'],
+    fullWord: 'Morze',
+    image: '🌊'
+  },
+  {
+    id: 'f8',
+    type: 'word',
+    question: 'Rz_d',
+    answer: 'ą',
+    options: ['ą', 'om', 'on'],
+    fullWord: 'Rząd',
+    image: '🏛️'
+  },
+  {
+    id: 'f9',
+    type: 'sentence',
+    question: 'Krowa daje ____',
+    answer: 'mleko',
+    options: ['mleko', 'sok', 'wodę'],
+    image: '🐮'
   }
 ];

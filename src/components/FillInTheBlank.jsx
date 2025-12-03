@@ -3,7 +3,7 @@ import { useGame } from '../context/GameContext';
 import { ArrowLeft, Check, Trophy, Star } from 'lucide-react';
 
 const FillInTheBlank = ({ data, onBack }) => {
-  const { addPoints } = useGame();
+  const { addPoints, unlockBadge } = useGame();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
@@ -56,12 +56,21 @@ const FillInTheBlank = ({ data, onBack }) => {
     }
   };
 
+  useEffect(() => {
+    if (completed) {
+      unlockBadge('spelling_master');
+    }
+  }, [completed, unlockBadge]);
+
   if (completed) {
     return (
       <div className="game-container" style={{ textAlign: 'center', padding: '2rem' }}>
         <Trophy size={80} color="#FFD700" />
         <h2>Gratulacje!</h2>
         <p>Ukończyłeś wszystkie zadania!</p>
+        <div style={{ margin: '20px 0', color: '#7209B7', fontWeight: 'bold' }}>
+            Zdobyto odznakę: Mistrz Ortografii! 📝
+        </div>
         <button className="nav-btn" onClick={onBack}>
           <ArrowLeft size={24} /> Wróć do menu
         </button>

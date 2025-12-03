@@ -11,6 +11,9 @@ export const voiceWords = [
   { id: 'oko', word: 'oko', emoji: '👁️' },
   { id: 'nos', word: 'nos', emoji: '👃' },
   { id: 'ucho', word: 'ucho', emoji: '👂' },
+  { id: 'ręka', word: 'ręka', emoji: '🤚' },
+  { id: 'noga', word: 'noga', emoji: '🦶' },
+  { id: 'zupa', word: 'zupa', emoji: '🍲' },
 ];
 
 export const logotherapyExercises = [
@@ -87,4 +90,22 @@ export const puzzleData = [
     distractors: ['A', 'L', 'M'],
     gridSize: { rows: 1, cols: 3 } // 3 elements
   },
+  {
+    id: 'p5',
+    word: 'PIES',
+    imageUrl: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🐶',
+    parts: ['P', 'I', 'E', 'S'],
+    distractors: ['L', 'O', 'K'],
+    gridSize: { rows: 2, cols: 2 }
+  },
+  {
+    id: 'p6',
+    word: 'LAS',
+    imageUrl: 'https://images.unsplash.com/photo-1448375240586-dfd8f3793300?q=80&w=600&auto=format&fit=crop',
+    imageEmoji: '🌲',
+    parts: ['L', 'A', 'S'],
+    distractors: ['K', 'O', 'T'],
+    gridSize: { rows: 1, cols: 3 }
+  }
 ];

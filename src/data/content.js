@@ -22,6 +22,15 @@ export const letters = [
   { id: 'w', char: 'w', type: 'consonant', sound: 'wu' },
   { id: 'y', char: 'y', type: 'vowel', sound: 'y' },
   { id: 'z', char: 'z', type: 'consonant', sound: 'zet' },
+  { id: 'ż', char: 'ż', type: 'consonant', sound: 'rzet' },
+  { id: 'ź', char: 'ź', type: 'consonant', sound: 'ziet' },
+  { id: 'ć', char: 'ć', type: 'consonant', sound: 'cie' },
+  { id: 'ń', char: 'ń', type: 'consonant', sound: 'eń' },
+  { id: 'ł', char: 'ł', type: 'consonant', sound: 'eł' },
+  { id: 'ó', char: 'ó', type: 'vowel', sound: 'o kreskowane' },
+  { id: 'ś', char: 'ś', type: 'consonant', sound: 'eś' },
+  { id: 'ą', char: 'ą', type: 'vowel', sound: 'ą' },
+  { id: 'ę', char: 'ę', type: 'vowel', sound: 'ę' },
 ];
 
 export const upperCaseLetters = letters.map(l => ({ ...l, char: l.char.toUpperCase() }));
@@ -38,9 +47,29 @@ export const syllables = [
   { id: 'la', char: 'la', type: 'syllable' },
   { id: 'le', char: 'le', type: 'syllable' },
   { id: 'li', char: 'li', type: 'syllable' },
+  { id: 'lo', char: 'lo', type: 'syllable' },
+  { id: 'lu', char: 'lu', type: 'syllable' },
   { id: 'da', char: 'da', type: 'syllable' },
+  { id: 'de', char: 'de', type: 'syllable' },
+  { id: 'do', char: 'do', type: 'syllable' },
   { id: 'ka', char: 'ka', type: 'syllable' },
+  { id: 'ke', char: 'ke', type: 'syllable' },
+  { id: 'ki', char: 'ki', type: 'syllable' },
+  { id: 'ko', char: 'ko', type: 'syllable' },
+  { id: 'ku', char: 'ku', type: 'syllable' },
   { id: 'ba', char: 'ba', type: 'syllable' },
+  { id: 'be', char: 'be', type: 'syllable' },
+  { id: 'bi', char: 'bi', type: 'syllable' },
+  { id: 'bo', char: 'bo', type: 'syllable' },
+  { id: 'pa', char: 'pa', type: 'syllable' },
+  { id: 'po', char: 'po', type: 'syllable' },
+  { id: 'pi', char: 'pi', type: 'syllable' },
+  { id: 'ra', char: 'ra', type: 'syllable' },
+  { id: 'ro', char: 'ro', type: 'syllable' },
+  { id: 'sa', char: 'sa', type: 'syllable' },
+  { id: 'so', char: 'so', type: 'syllable' },
+  { id: 'za', char: 'za', type: 'syllable' },
+  { id: 'zo', char: 'zo', type: 'syllable' },
 ];
 
 export const stickers = [
@@ -75,5 +104,7 @@ export const badges = [
     { id: 'master_big', name: 'Mistrz Dużych Liter', icon: 'ABC', description: 'Ukończono naukę dużych liter' },
     { id: 'master_syllables', name: 'Mistrz Sylab', icon: 'MaMe', description: 'Poznano sylaby' },
     { id: 'puzzle_solver', name: 'Mistrz Puzzli', icon: '🧩', description: 'Ułożono 5 słów' },
-    { id: 'quiz_wiz', name: 'Omnibus', icon: '🎓', description: 'Zdobyto 100 punktów w quizach' }
+    { id: 'quiz_wiz', name: 'Omnibus', icon: '🎓', description: 'Zdobyto 100 punktów w quizach' },
+    { id: 'sentence_master', name: 'Poeta', icon: '✍️', description: 'Ułożono wszystkie zdania' },
+    { id: 'spelling_master', name: 'Mistrz Ortografii', icon: '📝', description: 'Ukończono wszystkie uzupełnianki' }
 ];

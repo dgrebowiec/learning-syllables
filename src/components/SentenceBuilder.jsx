@@ -3,7 +3,7 @@ import { useGame } from '../context/GameContext';
 import { ArrowLeft, Check, RefreshCw, Trophy, Star } from 'lucide-react';
 
 const SentenceBuilder = ({ data, onBack }) => {
-  const { addPoints } = useGame();
+  const { addPoints, unlockBadge } = useGame();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [userOrder, setUserOrder] = useState([]);
   const [availableWords, setAvailableWords] = useState([]);
@@ -65,12 +65,21 @@ const SentenceBuilder = ({ data, onBack }) => {
     }
   };
 
+  useEffect(() => {
+    if (completed) {
+      unlockBadge('sentence_master');
+    }
+  }, [completed, unlockBadge]);
+
   if (completed) {
     return (
       <div className="game-container" style={{ textAlign: 'center', padding: '2rem' }}>
         <Trophy size={80} color="#FFD700" />
         <h2>Gratulacje!</h2>
         <p>Ukończyłeś wszystkie zdania!</p>
+        <div style={{ margin: '20px 0', color: '#7209B7', fontWeight: 'bold' }}>
+            Zdobyto odznakę: Poeta! ✍️
+        </div>
         <button className="nav-btn" onClick={onBack}>
           <ArrowLeft size={24} /> Wróć do menu
         </button>

@@ -10,26 +10,23 @@ def run(playwright):
 
     # --- TEST FILL IN BLANKS COMPLETION ---
     print("Navigating to Fill in Blanks...")
-    page.click("text=Klasa 2")
+    # UPDATED: Button is now called "Szkoła"
+    page.click("text=Szkoła")
     page.click("text=Uzupełnianki")
     page.wait_for_selector(".question-card")
 
-    # We need to answer all questions to reach completion
-    # Currently data has 6 items.
-    # To speed up, we can't easily skip, so we must answer correctly.
-    # But wait, we don't know the order or the correct answer easily without logic.
-    # However, the code logic: if (selectedOption === currentItem.answer)
-    # The 'answer' is not in the DOM.
-    # But we can try all options until "Correct" feedback appears?
-
     print("Attempting to solve all questions...")
 
-    # Loop until we see "Gratulacje" or timeout
-    max_attempts = 10 # 6 questions
+    max_attempts = 15 # increased limit
     for i in range(max_attempts):
         if page.locator("text=Gratulacje!").is_visible():
             print("Completion screen reached!")
             page.screenshot(path="verification/completion_fill_blanks.png")
+            # Verify badge message
+            if page.locator("text=Zdobyto odznakę: Mistrz Ortografii!").is_visible():
+                print("Badge message verified!")
+            else:
+                print("Badge message NOT found.")
             break
 
         # Find options
@@ -58,7 +55,6 @@ def run(playwright):
                 continue
 
         if not found_correct:
-             # This might happen if we already finished or logic failed
              if page.locator("text=Gratulacje!").is_visible():
                  print("Completion screen reached!")
                  page.screenshot(path="verification/completion_fill_blanks.png")
